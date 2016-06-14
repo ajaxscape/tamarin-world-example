@@ -1,10 +1,14 @@
 'use strict'
 
-let _ = require('lodash')
+require('chai')
+  .use(require('chai-as-promised'))
+  .should()
 
 module.exports = function () {
-  this.When(/^I am signed out$/, function () {
-    return this.visit('signOut')
-      .then(() => this.notFind('header:myUsername'))
+  this.Given(/^I visit (https?:\/\/.*\..*)$/, function (url) {
+    return this.getDriver()
+      .then((driver) => driver.get(url))
+      .then(() => this.setData('cheese', 'cheddar'))
+      .then(() => this.getData('cheese').should.equal('cheddar'))
   })
 }
