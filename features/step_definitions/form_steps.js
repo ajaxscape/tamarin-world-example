@@ -17,9 +17,6 @@ module.exports = function () {
 
   this.When(/^I enter "([^"]*)" into the search bar$/, function (searchTerm) {
     return this.getDriver()
-      .then((driver) => driver.findElements(By.css('[title="search"]'))
-        .then((el) => {
-          return driver.sendKeys(el, searchTerm)
-        }))
+      .then((driver) => driver.findElement(By.css('[title="Search"]')).sendKeys(searchTerm + '\n'))
   })
 }
