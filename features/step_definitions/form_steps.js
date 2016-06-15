@@ -11,4 +11,8 @@ module.exports = function () {
       .then(() => this.setData('cheese', 'cheddar'))
       .then(() => this.getData('cheese').should.equal('cheddar'))
   })
+
+  this.When(/^I enter "([^"]*)" into the search bar$/, function (searchTerm) {
+    return this.sendKeys(id, searchTerm)
+  })
 }

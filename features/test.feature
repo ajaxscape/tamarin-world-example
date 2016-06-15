@@ -4,3 +4,6 @@ Feature: Do a Google Search
 
   Scenario: Google Search
     Given I visit http://google.com
+    When I enter "Hello" into the search bar
+    And I click the search button
+    Then I expect to see some results
