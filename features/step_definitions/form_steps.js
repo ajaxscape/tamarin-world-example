@@ -1,5 +1,8 @@
 'use strict'
 
+const webDriver = require('selenium-webdriver')
+const By = webDriver.By
+
 require('chai')
   .use(require('chai-as-promised'))
   .should()
@@ -13,6 +16,10 @@ module.exports = function () {
   })
 
   this.When(/^I enter "([^"]*)" into the search bar$/, function (searchTerm) {
-    return this.sendKeys(id, searchTerm)
+    return this.getDriver()
+      .then((driver) => driver.findElements(By.css('[title="search"]'))
+        .then((el) => {
+          return driver.sendKeys(el, searchTerm)
+        }))
   })
 }
