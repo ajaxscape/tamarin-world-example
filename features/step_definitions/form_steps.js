@@ -15,8 +15,7 @@ module.exports = function () {
       .then(() => this.getData('cheese').should.equal('cheddar'))
   })
 
-  this.When(/^I enter "([^"]*)" into the search bar$/, function (searchTerm) {
-    return this.getDriver()
-      .then((driver) => driver.findElement(By.css('[title="Search"]')).sendKeys(searchTerm + '\n'))
+  this.When(/^I search for "([^"]*)"$/, function (searchTerm) {
+    return this.sendKeys('[title="Search"]', searchTerm + '\n')
   })
 }
