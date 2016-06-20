@@ -23,6 +23,6 @@
     "cucumber": "^0.9.4",
     "selenium-webdriver": "^2.53.2",
     "standard": "^7.1.2",
-    "tamarin-world": "0.0.14"
+    "tamarin-world": "0.0.19"
   }
 }

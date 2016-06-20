@@ -16,11 +16,16 @@ module.exports = function () {
   })
 
   this.When(/^I click the "([^"]*)" menu link$/, function (linkText) {
-    return this.executeScript(($linkText) => {
-      let link = document.querySelector('a').filter((el) => el.text === $linkText).pop()
-      if (link) {
-        link.click()
-      }
-    }, linkText)
+    return this.whenReady('#top_nav', 5)
+      .then((nav) => this.executeScript(($nav, $linkText) => {
+        let results = Array.prototype.slice.call($nav.querySelectorAll('a'))
+        console.log(results)
+        let link = results.filter((el) => el.text === $linkText).pop()
+        if (link) {
+          link.click()
+        } else {
+          throw new Error('Cannot find link: ' + $linkText)
+        }
+      }, nav, linkText))
   })
 }
