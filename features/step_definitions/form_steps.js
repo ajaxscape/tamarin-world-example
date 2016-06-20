@@ -14,4 +14,13 @@ module.exports = function () {
   this.When(/^I search for "([^"]*)"$/, function (searchTerm) {
     return this.sendKeys('[title="Search"]', searchTerm + '\n')
   })
+
+  this.When(/^I click the "([^"]*)" menu link$/, function (linkText) {
+    return this.executeScript(($linkText) => {
+      let link = document.querySelector('a').filter((el) => el.text === $linkText).pop()
+      if (link) {
+        link.click()
+      }
+    }, linkText)
+  })
 }
