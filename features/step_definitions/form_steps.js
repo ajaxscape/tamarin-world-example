@@ -12,14 +12,13 @@ module.exports = function () {
   })
 
   this.When(/^I search for "([^"]*)"$/, function (searchTerm) {
-    return this.sendKeys('[title="Search"]', searchTerm + '\n')
+    return this.sendKeys('[title="Search"]', searchTerm + '\n', 5)
   })
 
   this.When(/^I click the "([^"]*)" menu link$/, function (linkText) {
     return this.whenReady('#top_nav', 5)
       .then((nav) => this.executeScript(($nav, $linkText) => {
         let results = Array.prototype.slice.call($nav.querySelectorAll('a'))
-        console.log(results)
         let link = results.filter((el) => el.text === $linkText).pop()
         if (link) {
           link.click()
