@@ -6,5 +6,4 @@ Feature: Do a Google Search
     Given I visit http://google.com
     When I search for "Ben Surgison"
     When I click the "Images" menu link
-    And I click the search button
-    Then I expect to see some results
+    Then I expect to see some "Image" results
