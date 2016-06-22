@@ -7,6 +7,11 @@ require('chai')
   .use(require('chai-as-promised'))
   .should()
 
+const map = {
+  'Features': By.xpath('//*[@id="nav-features"]/a'),
+  'subMenu': (linkText) => By.xpath(`//*[@id="nav-features"]//a[text()="${linkText}"]`)
+}
+
 module.exports = function () {
   this.Given(/^I visit (https?:\/\/.*\..*)$/, function (url) {
     return this.visit(url)
@@ -18,37 +23,19 @@ module.exports = function () {
   })
 
   this.When(/^I click the "([^"]*)" menu link$/, function (linkText) {
-    return this.click(By.xpath(`//a[contains(.,'${linkText}')]`), 5)
+    return this.click(`//*[@role="navigation"]//a[text()="${linkText}"]`, 5)
   })
-  //
-  //this.When(/^I click the "([^"]*)" menu link$/, function (linkText) {
-  //  return this.whenReady('#top_nav', 5)
-  //    .then((nav) => this.executeScript(($nav, $linkText) => {
-  //      let results = Array.prototype.slice.call($nav.querySelectorAll('a'))
-  //      let link = results.filter((el) => el.text === $linkText).pop()
-  //      if (link) {
-  //        link.click()
-  //      } else {
-  //        throw new Error('Cannot find link: ' + $linkText)
-  //      }
-  //    }, nav, linkText))
-  //})
 
   this.Then(/^I expect to see some "([^"]*)" results$/, function (type) {
     return this.getData('searchTerm')
       .then((searchTerm) => this.whenReady(`img[alt="${type} result for ${searchTerm}"]`, 5))
   })
 
-  this.When(/^I hover over the "([^"]*)" menu link$/, function (linkText) {
-    return this.whenReady('#navigation', 5)
-      .then((nav) => this.executeScript(($nav, $linkText) => {
-        let results = Array.prototype.slice.call($nav.querySelectorAll('a'))
-        let link = results.filter((el) => el.text === $linkText).pop()
-        if (link) {
-          link.hover()
-        } else {
-          throw new Error('Cannot find link: ' + $linkText)
-        }
-      }, nav, linkText))
+  this.When(/^I hover over the "([^"]*)" menu link$/, function (link) {
+    return this.hover(map[link], 500, 5)
+  })
+  
+  this.When(/^I click the "([^"]*)" submenu link$/, function (linkText) {
+    return this.click(map.subMenu(linkText), 5)
   })
 }
