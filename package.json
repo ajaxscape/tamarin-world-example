@@ -23,7 +23,7 @@
     "cucumber": "^0.9.4",
     "selenium-webdriver": "^2.53.2",
     "standard": "^7.1.2",
-    "tamarin-world": "git://github.com/ajaxscape/tamarin-world.git",
+    "tamarin-world": "0.0.27",
     "tamarin-page-object": "git://github.com/ajaxscape/tamarin-page-object.git"
   }
 }

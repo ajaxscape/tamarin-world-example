@@ -19,16 +19,16 @@ module.exports = function () {
 
   this.When(/^I search for "([^"]*)"$/, function (searchTerm) {
     return this.setData('searchTerm', searchTerm)
-      .then(() => this.sendKeys('[title="Search"]', searchTerm + '\n', 5))
+      .then(() => this.sendKeys(By.css('[title="Search"]'), searchTerm + '\n', 5))
   })
 
   this.When(/^I click the "([^"]*)" menu link$/, function (linkText) {
-    return this.click(`//*[@role="navigation"]//a[text()="${linkText}"]`, 5)
+    return this.click(By.xpath(`//*[@role="navigation"]//a[text()="${linkText}"]`), 5)
   })
 
   this.Then(/^I expect to see some "([^"]*)" results$/, function (type) {
     return this.getData('searchTerm')
-      .then((searchTerm) => this.whenReady(`img[alt="${type} result for ${searchTerm}"]`, 5))
+      .then((searchTerm) => this.whenReady(By.css(`img[alt="${type} result for ${searchTerm}"]`), 5))
   })
 
   this.When(/^I hover over the "([^"]*)" menu link$/, function (link) {
