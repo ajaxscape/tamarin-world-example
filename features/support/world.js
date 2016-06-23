@@ -1,9 +1,11 @@
 'use strict'
 
 const driver = require('./driver')
+const tamarin = require('tamarin-world')
+  .use(require('tamarin-page-object'))
 
 module.exports = {
-  World: class extends require('tamarin-world').World {
+  World: class extends tamarin.World {
     constructor () {
       super(driver)
     }
