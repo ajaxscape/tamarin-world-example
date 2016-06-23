@@ -5,9 +5,10 @@ const tamarin = require('tamarin-world')
   .use(require('tamarin-page-object'))
 
 module.exports = {
-  World: class extends tamarin.World {
+  World: class extends tamarin {
     constructor () {
       super(driver)
+      this.setPage('home', {route: '/'})
     }
   }
 }
