@@ -4,6 +4,6 @@ Feature: Do a Google Search
 
   Scenario: Google Search
     Given I visit http://google.com
-    When I search for "Ben Surgison"
+    When I search for "Tamarin"
     When I click the "Images" menu link
     Then I expect to see some "Image" results
