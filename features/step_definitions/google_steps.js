@@ -3,10 +3,6 @@
 const webDriver = require('selenium-webdriver')
 const By = webDriver.By
 
-require('chai')
-  .use(require('chai-as-promised'))
-  .should()
-
 const find = {
   'search': By.css('[title="Search"]'),
   'navLink': (linkText) => By.xpath(`//*[@role="navigation"]//a[text()="${linkText}"]`),
