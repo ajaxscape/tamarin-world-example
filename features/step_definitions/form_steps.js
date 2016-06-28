@@ -7,10 +7,16 @@ require('chai')
   .use(require('chai-as-promised'))
   .should()
 
-const map = {
+const find = {
   'Features': By.xpath('//*[@id="nav-features"]/a'),
-  'subMenu': (linkText) => By.xpath(`//*[@id="nav-features"]//a[text()="${linkText}"]`)
+  'search': By.css('[title="Search"]'),
+  'subMenu': (linkText) => By.xpath(`//*[@id="nav-features"]//a[text()="${linkText}"]`),
+  'navLink': (linkText) => By.xpath(`//*[@role="navigation"]//a[text()="${linkText}"]`),
+  'results': (type, searchTerm) => By.css(`img[alt="${type} result for ${searchTerm}"]`)
 }
+
+const retries = 5
+const hoverDelay = 500
 
 module.exports = function () {
   this.Given(/^I visit (https?:\/\/.*\..*)$/, function (url) {
@@ -19,23 +25,23 @@ module.exports = function () {
 
   this.When(/^I search for "([^"]*)"$/, function (searchTerm) {
     return this.setData('searchTerm', searchTerm)
-      .then(() => this.sendKeys(By.css('[title="Search"]'), searchTerm + '\n', 5))
+      .then(() => this.sendKeys(find.search, searchTerm + '\n', retries))
   })
 
   this.When(/^I click the "([^"]*)" menu link$/, function (linkText) {
-    return this.click(By.xpath(`//*[@role="navigation"]//a[text()="${linkText}"]`), 5)
+    return this.click(find.navLink(linkText), retries)
   })
 
   this.Then(/^I expect to see some "([^"]*)" results$/, function (type) {
     return this.getData('searchTerm')
-      .then((searchTerm) => this.whenReady(By.css(`img[alt="${type} result for ${searchTerm}"]`), 5))
+      .then((searchTerm) => this.whenReady(find.results(type, searchTerm), retries))
   })
 
   this.When(/^I hover over the "([^"]*)" menu link$/, function (link) {
-    return this.hover(map[link], 500, 5)
+    return this.hover(find[link], hoverDelay, retries)
   })
-  
+
   this.When(/^I click the "([^"]*)" submenu link$/, function (linkText) {
-    return this.click(map.subMenu(linkText), 5)
+    return this.click(find.subMenu(linkText), retries)
   })
 }
