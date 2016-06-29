@@ -8,7 +8,7 @@ require('chai')
   .should()
 
 const page = {
-  'Features': By.xpath('//*[@id="nav-features"]/a'),
+  'Features': 'fred>>//*[@id="nav-features"]/a', // By.xpath('//*[@id="nav-features"]/a'),
   'subMenu': (linkText) => By.xpath(`//*[@id="nav-features"]//a[text()="${linkText}"]`),
   'heading': By.css('h1')
 }
