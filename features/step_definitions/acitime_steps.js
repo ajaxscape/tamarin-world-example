@@ -1,16 +1,9 @@
 'use strict'
 
-const webDriver = require('selenium-webdriver')
-const By = webDriver.By
-
-require('chai')
-  .use(require('chai-as-promised'))
-  .should()
-
 const page = {
-  'Features': 'fred>>//*[@id="nav-features"]/a', // By.xpath('//*[@id="nav-features"]/a'),
-  'subMenu': (linkText) => By.xpath(`//*[@id="nav-features"]//a[text()="${linkText}"]`),
-  'heading': By.css('h1')
+  'Features': {xpath: '//*[@id="nav-features"]/a'},
+  'subMenu': (linkText) => ({xpath: `//*[@id="nav-features"]//a[text()="${linkText}"]`}),
+  'heading': {css: 'h1'}
 }
 
 const retries = 5
