@@ -6,6 +6,6 @@ module.exports = function () {
   })
 
   this.Then(/^I expect the title to be "([^"]*)"$/, function (title) {
-    return this.getTitle().should.eventually.equal(title)
+    return this.waitForTitle(title)
   })
 }

@@ -23,6 +23,6 @@ module.exports = function () {
 
   this.Then(/^I expect to see some "([^"]*)" results$/, function (type) {
     return this.getData('searchTerm')
-      .then((searchTerm) => this.whenReady(page.results(type, searchTerm), retries))
+      .then((searchTerm) => this.waitFor(page.results(type, searchTerm), retries))
   })
 }
