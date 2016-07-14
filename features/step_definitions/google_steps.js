@@ -12,16 +12,16 @@ const page = {
 const retries = 5
 
 module.exports = function () {
-  this.When(/^I search for "([^"]*)"$/, function (searchTerm) {
+  this.When(/^I search for "([^"]*)"$/, function enterSearchTermStep (searchTerm) {
     return this.setData('searchTerm', searchTerm)
       .then(() => this.sendKeys(page.search, searchTerm + '\n', retries))
   })
 
-  this.When(/^I click the "([^"]*)" menu link$/, function (linkText) {
+  this.When(/^I click the "([^"]*)" menu link$/, function clickMenuLinkStep (linkText) {
     return this.click(page.navLink(linkText), retries)
   })
 
-  this.Then(/^I expect to see some "([^"]*)" results$/, function (type) {
+  this.Then(/^I expect to see some "([^"]*)" results$/, function waitForResultsStep (type) {
     return this.getData('searchTerm')
       .then((searchTerm) => this.waitFor(page.results(type, searchTerm), retries))
   })
