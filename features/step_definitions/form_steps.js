@@ -16,4 +16,8 @@ module.exports = function () {
   this.Then(/^I expect the "([^"]*)" cookie to be "([^"]*)"$/, function waitForTitleStep (name, expectedValue) {
     return this.waitForCookie(name).should.eventually.have.property('value', expectedValue)
   })
+
+  this.Then(/^I expect the url to contain "([^"]*)"$/, function (partial) {
+    return this.waitForUrl().should.eventually.contain(partial)
+  })
 }
