@@ -7,7 +7,7 @@ const page = {
 }
 
 const retries = 5
-const hoverDelay = 500
+const hoverDelay = 1000
 
 module.exports = function () {
   this.When(/^I hover over the "([^"]*)" menu link$/, function hoverMenuLinkStep (link) {
