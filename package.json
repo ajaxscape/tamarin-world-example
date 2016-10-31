@@ -24,6 +24,6 @@
     "lodash": "^4.16.4",
     "selenium-webdriver": "^2.53.2",
     "standard": "^8.3.0",
-    "tamarin-world": "^1.0.0"
+    "tamarin-world": "^1.0.7"
   }
 }
